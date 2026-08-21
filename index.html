@@ -139,20 +139,33 @@ Sahil <span class="dubai-glow">Chaudhary™️</span>
                 <p class="text-sm font-semibold">🤝 INTERNATIONAL Back To Back Pass 🤝 </p>
             </div>
         </div>
-    </div> 
+    </div>
     <script>
-    let timeLeft = 5;
     const countdownElement = document.getElementById('countdown');
 
-    const countdownTimer = setInterval(() => {
+    // Check if user has already been redirected in this session
+    if (sessionStorage.getItem('redirected') === 'true') {
+        countdownElement.textContent = '';
+    } else {
+        let timeLeft = 5;
         countdownElement.textContent = timeLeft;
-        timeLeft--;
 
-        if (timeLeft < 0) {
-            clearInterval(countdownTimer);
-            window.location.href = "https://t.me/+ANIVKDsdC6ExMmU1";
-        }
-    }, 1000);
+        const countdownTimer = setInterval(() => {
+            timeLeft--;
+
+            if (timeLeft <= 0) {
+                clearInterval(countdownTimer);
+
+                // Remember that redirect has happened
+                sessionStorage.setItem('redirected', 'true');
+
+                window.location.href = "https://t.me/+ANIVKDsdC6ExMmU1";
+            } else {
+                countdownElement.textContent = timeLeft;
+            }
+        }, 1000);
+    }
 </script>
+   
 </body>
 </html>
